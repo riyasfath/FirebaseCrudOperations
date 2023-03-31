@@ -5,8 +5,11 @@ import static android.content.ContentValues.TAG;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -37,6 +40,12 @@ public class Read_data extends AppCompatActivity {
         lv= findViewById(R.id.lv);
         ArrayAdapter<String> arr = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,values);
         lv.setAdapter(arr);
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                startActivity(new Intent(Read_data.this,Update.class));
+            }
+        });
 
 
         //data retrival
@@ -49,7 +58,8 @@ public class Read_data extends AppCompatActivity {
 //                        HashMap<String ,Object> stud = (HashMap<String, Object>) document.getData();
 //                        String name = (String) stud.get("name");
                             Log.d(TAG,document.getId()+"=>"+document.getData());
-                        values.add(document.getString("course")+document.getString("name"));
+//            add name and course            values.add(document.getString("course")+document.getString("name"));
+                        values.add(document.getString("name"));
                     }
                     arr.notifyDataSetChanged();
 
